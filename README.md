@@ -1,10 +1,8 @@
 # Nexmarine
 
-![Nexmarine Logo](nexmarine_logo.png)
+![Nexmarine Logo](https://raw.githubusercontent.com/makalin/Nexmarine/main/assets/nexmarine_logo.png)
 
 **Nexmarine** is a blazing-fast, cross-platform marine data server written in Rust. Designed as a modern alternative to bulky middleware solutions, Nexmarine leverages the lightweight and efficient **Seabind** protocol to handle vessel data with precision, reliability, and speed.
-
----
 
 ## 🚀 Features
 
@@ -15,87 +13,117 @@
 - 🔌 **Modular & Extensible** — Plugin-ready architecture without the bloat
 - ⚙️ **Supports NMEA 0183/2000**, GPS, AIS, environmental sensors, and more
 - 📝 **Simple Configuration** — Human-readable TOML config files
-- 📊 **Dashboard Ready** — API endpoints for easy integration with web/mobile UIs
+- 📊 **Dashboard Ready** — Modern web interface for real-time monitoring
 
----
+## 📦 Installation
 
-## 🌐 Seabind Protocol
+### Using Cargo
 
-![Seabind Logo](seabind_logo.png)
-
-**Seabind** is a next-generation protocol crafted for efficient marine data communication.
-
-### Key Highlights:
-- 🔹 **Binary + JSON Hybrid** — Optimized for both machine efficiency and human readability
-- 🔹 **Structured Data Paths** — Example: `nav.position.latitude`
-- 🔹 **Unit-Aware** — Integrated support for maritime units (knots, meters, degrees)
-- 🔹 **Low Overhead** — Minimal packet size, ideal for embedded and IoT devices
-- 🔹 **Versioned Schema** — Future-proof design with backward compatibility
-- 🔹 **Secure by Design** — Supports encrypted channels (TLS/WebSocket Secure)
-
-📄 **Protocol Spec:** [docs/seabind.md](https://github.com/makalin/Nexmarine/tree/main/docs/seabind.md) *(Coming Soon)*
-
----
-
-## ⚡ Quick Start
-
-### 1. Install via Cargo
 ```bash
 cargo install nexmarine
 ```
 
-### 2. Example Configuration (`nexmarine.toml`)
+### Building from Source
+
+1. Clone the repository:
+```bash
+git clone https://github.com/makalin/Nexmarine.git
+cd Nexmarine
+```
+
+2. Build the project:
+```bash
+cargo build --release
+```
+
+3. Run the server:
+```bash
+./target/release/nexmarine --config nexmarine.toml
+```
+
+## 🛠️ Configuration
+
+Create a `nexmarine.toml` file:
+
 ```toml
 [input]
-source = "/dev/ttyUSB0"
-format = "nmea0183"
+source = "/dev/ttyUSB0"  # Serial port for NMEA data
+format = "nmea0183"      # Input format (nmea0183 or nmea2000)
 
 [output]
-websocket = true
-rest_api = true
-seabind_log = "./logs/vessel_data.sbnd"
+websocket = true         # Enable WebSocket server
+rest_api = true         # Enable REST API
+seabind_log = "./logs/vessel_data.sbnd"  # Optional log file
 ```
 
-### 3. Run Nexmarine
+## 🌐 Web Dashboard
+
+Nexmarine includes a modern web dashboard for real-time monitoring:
+
+1. Access the dashboard at `http://localhost:3000`
+2. Features include:
+   - Real-time position, speed, and navigation data
+   - Environmental sensor readings
+   - AIS target tracking
+   - System status monitoring
+   - Customizable layouts
+
+## 🔌 API Reference
+
+### WebSocket API
+
+Connect to `ws://localhost:8000/ws` to receive real-time data streams.
+
+Example message format:
+```json
+{
+  "path": "nav.position.latitude",
+  "timestamp": 1648372981234,
+  "value": 45.5,
+  "unit": "degrees",
+  "source": "GPS"
+}
+```
+
+### REST API
+
+- `GET /api/status` - Server status
+- `GET /api/data` - Latest data snapshot
+- `POST /api/data` - Send data to server
+
+## 🧪 Testing
+
+Run the test suite:
+
 ```bash
-nexmarine --config nexmarine.toml
+cargo test
 ```
 
-Access API: `http://localhost:8000/api/status`  
-WebSocket: `ws://localhost:8000/ws`
+For integration tests:
 
----
+```bash
+cargo test --features integration-tests
+```
 
-## 📅 Roadmap
+## 📖 Documentation
 
-- [ ] Seabind Protocol v1.0 Release
-- [ ] Live Web Dashboard (WASM-based)
-- [ ] MQTT & CAN Bus Integration
-- [ ] Cloud Sync Options
-- [ ] Mobile App SDK
-- [ ] Auto-discovery for onboard devices
-- [ ] Nexmarine + Signal K Bridge
+Generate and view the documentation:
 
----
+```bash
+cargo doc --no-deps --open
+```
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!  
-Feel free to check the [issues page](https://github.com/makalin/Nexmarine/issues).
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes
-4. Push to the branch
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
-
----
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 

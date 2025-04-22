@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexmarine Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Nexmarine Dashboard</h1>
+            <div class="connection-status">
+                <span class="status-dot"></span>
+                <span class="status-text">Connected</span>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#navigation" class="active">Navigation</a></li>
+                <li><a href="#environmental">Environmental</a></li>
+                <li><a href="#ais">AIS Data</a></li>
+                <li><a href="#system">System Status</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <section id="navigation" class="panel">
+                <h2>Navigation Data</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Position</h3>
+                        <div class="data-row">
+                            <span>Latitude:</span>
+                            <span id="latitude">--°--'--"N</span>
+                        </div>
+                        <div class="data-row">
+                            <span>Longitude:</span>
+                            <span id="longitude">--°--'--"E</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Speed</h3>
+                        <div class="data-row">
+                            <span>SOG:</span>
+                            <span id="sog">--.-- kts</span>
+                        </div>
+                        <div class="data-row">
+                            <span>COG:</span>
+                            <span id="cog">---°</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Depth</h3>
+                        <div class="data-row">
+                            <span>Water Depth:</span>
+                            <span id="depth">--.-- m</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="status-bar">
+                <span>Last Update: <span id="last-update">Never</span></span>
+                <span>Data Rate: <span id="data-rate">0</span> msg/s</span>
+            </div>
+        </footer>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html> 
